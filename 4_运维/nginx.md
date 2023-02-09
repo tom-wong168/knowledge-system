@@ -1,9 +1,10 @@
 # nginx
 
 ## 网址重写和代理转发
+
 location /api {
         rewrite ^.+api/?(.*)$ /$1 break;
-        proxy_pass http://ip:port;
+        proxy_pass <http://ip:port>;
 }
 
 ## 413问题处理(请求服务体超大)
@@ -13,7 +14,6 @@ location /api {
 可以选择在http{ }中设置： client_max_body_size 20m;
 
  也可以选择在server{ }中设置： client_max_body_size 20m;
-
 
 还可以选择在location{ }中设置：client_max_body_size 20m;
 
