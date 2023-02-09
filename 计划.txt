@@ -1,0 +1,10 @@
+一，日常学习计划
+1，pg学习 中文手册
+(1)进度 <http://www.postgres.cn/docs/9.5/ddl-basics.html>
+(2)大目录 <http://www.postgres.cn/docs/9.5/sql.html>
+2，前端周刊
+3，js高程
+4，面试相关视频
+
+二，待处理的计划
+1，为React、 React Native、Vue新增实践项目，接入TS
