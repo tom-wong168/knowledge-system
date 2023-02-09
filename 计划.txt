@@ -7,5 +7,5 @@
 4，面试相关视频
 
 二，待处理的计划
-1，为React、 React Native、Vue新增实践项目，接入TS
-2，完成一篇博客：介绍useMemo和useCallback
+1，完成一篇博客：介绍useMemo和useCallback
+2，为React、 React Native、Vue新增实践项目，接入TS
