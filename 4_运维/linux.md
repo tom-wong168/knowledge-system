@@ -1,5 +1,5 @@
 
-# bash
+# linux操作
 
 cd // 进入某个文件  
 cd ~ // 进入根目录  
@@ -18,8 +18,6 @@ mv file1 file2
 mkdir [-p] 目录名 // 创建新文件  
 说明:  
 参数：-p 确保目录名称存在，如果目录不存在的就新创建一个  
-创建文件
-如：touch a.txt
 
 $ rm -rf 文件夹名字 // 删除某个文件夹  
 说明：  
@@ -33,24 +31,52 @@ insert // 键位，进入输入状态
 esc q! // 不保存退出
 esc wq // 保存退出
 
+## java部署相关
+
 查看端口占用情况 lsof -i:端口号
 
 查看Java进程获取pid号：
 
 ps -ef|grep java|grep -v grep
 
-root     30110     1  2 14:18 pts/0    00:00:13 java -Xdebug -Xrunjdwp:transport=dt_socket,address=8866,server=y,suspend=n -jar /javaXiaoa/dev/xiaoa-0.0.2.jar
-
-结束结束进程
-kill -9 进程号(对应以上30110)
- 
-
-部署Javajar包并指定输出日志文件（null不输出）：
-
-nohup java -jar xiaoa-0.0.2.jar >/dev/null &
-
 部署Javajar包并指定输出日志文件（null不输出）：
 
 nohup java -jar xx.jar >/dev/null &
 
 &是必须的
+
+## CentOS7通过yum安装JDK1.8
+
+Yum（全称为 Yellow dog Updater, Modified）是一个在Fedora和RedHat以及CentOS中的Shell前端软件包管理器。基于RPM包管理，能够从指定的服务器自动下载RPM包并且安装，可以自动处理依赖性关系，并且一次安装所有依赖的软件包，无须繁琐地一次次下载、安装。
+
+安装之前先检查一下系统有没有自带open-jdk
+
+命令：
+
+rpm -qa |grep java
+
+rpm -qa |grep jdk
+
+rpm -qa |grep gcj
+
+如果没有输入信息表示没有安装。
+
+如果安装可以使用rpm -qa | grep java | xargs rpm -e --nodeps 批量卸载所有带有Java的文件  这句命令的关键字是java
+
+首先检索包含java的列表
+
+yum list java*
+
+检索1.8的列表
+
+yum list java-1.8*
+
+安装1.8.0的所有文件
+
+yum install java-1.8.0-openjdk* -y
+
+使用命令检查是否安装成功
+
+java -version
+
+到此安装结束了。这样安装有一个好处就是不需要对path进行设置，自动就设置好了
