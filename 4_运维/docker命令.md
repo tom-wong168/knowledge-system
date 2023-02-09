@@ -1,6 +1,7 @@
 # docker命令集合---相关操作参考菜鸟教程整理一份
 
 ## 基础命令  
+
 docker rename 原容器名  新容器名
 systemctl start docker // 启动docker
 sudo systemctl daemon-reload // 守护进程重启
@@ -14,7 +15,7 @@ docker ps // 查询正在运行的container容器
 dokcer ps -a // 查询所有container容器
 docker stop containerId/Name // 暂停某个容器
 docker rm contanerId/Name // 删除某个容器
-docker stop $(docker ps -a -q) // 停止所有容器 
+docker stop $(docker ps -a -q) // 停止所有容器
 docker rm $(docker ps -a -q) // 删除所有容器
 docker container restart egmp-console-test // 重启某个容器
 docker exec -it [容器ID] /bin/bash // 进入某个container容器
@@ -57,6 +58,7 @@ docker run -d -p 8091:80 --name echarts-map -v /echarts-map/www:/usr/share/nginx
 提醒：挂载时必须保证映射双方的内容一致，www和logs初始都是空目录，所以不用预先copy，nginx.conf必须预先copy，因为容器内非空；
 
 ## docker nginx配置https--感悟，善用logs用于调错
+
 1,以下命令使用 NGINX 默认的配置来启动一个 Nginx 容器实例：
 docker run --name runoob-nginx-test -p 8081:80 -d nginx
 2,首先，创建目录 moXiang, 用于存放后面的相关东西。
@@ -68,6 +70,7 @@ docker cp runoob-nginx-test:/etc/nginx/conf.d /moXiang
 5，进入/moXiang/conf.d 新建ssl.conf，键入如下内容
 
 # 挂载位置补充说明
+
     location / {
         root   /usr/share/nginx/html;
         index  index.html index.htm;
@@ -83,16 +86,17 @@ vim ssl.conf
   }
   location /api {
       rewrite ^.+api/?(.*)$ /$1 break;
-      proxy_pass https://v.952100.com:9028;
+      proxy_pass <https://v.952100.com:9028>;
   }
   location /fonts {
-      proxy_pass http://119.23.111.171:9004;
+      proxy_pass <http://119.23.111.171:9004>;
   }
   location /map {
-      proxy_pass http://119.23.111.171:9004;
+      proxy_pass <http://119.23.111.171:9004>;
   }
 
-## 以下属性中以ssl开头的属性代表与证书配置有关，其他属性请根据自己的需要进行配置。
+## 以下属性中以ssl开头的属性代表与证书配置有关，其他属性请根据自己的需要进行配置
+
 server {
   #SSL协议访问端口号为443。此处如未添加ssl，可能会造成Nginx无法启动。
   #这里指定的是容器内部nginx的https服务端口，外部主机可以随便写
@@ -133,13 +137,13 @@ server {
   }
   location /api {
       rewrite ^.+api/?(.*)$ /$1 break;
-      proxy_pass https://v.952100.com:9028;
-  } 
+      proxy_pass <https://v.952100.com:9028>;
+  }
   location /fonts {
-      proxy_pass http://119.23.111.171:9004;
+      proxy_pass <http://119.23.111.171:9004>;
   }
   location /map {
-      proxy_pass http://119.23.111.171:9004;
+      proxy_pass <http://119.23.111.171:9004>;
   }
 }
 4,部署命令
@@ -194,14 +198,13 @@ server {
     #}
 }
 
-
 ## php容器命令
 
-https://www.runoob.com/docker/docker-install-php.html
+<https://www.runoob.com/docker/docker-install-php.html>
 
 ## mySQL容器命令+mySQL连接
 
-https://www.runoob.com/docker/docker-install-mysql.html
+<https://www.runoob.com/docker/docker-install-mysql.html>
 
 ## docker nginx建立静态资源服务器  ---应该把log挂在出来方便调错
 
@@ -271,4 +274,3 @@ http {
 
     include /etc/nginx/conf.d/*.conf;
 }
-
